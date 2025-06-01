@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عن منصة همة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root[data-theme="light"] {
+            --bg-gradient-from: #f5f7fa;
+            --bg-gradient-to: #e8edf5;
+            --accent-color-1: #2c5364;
+            --accent-color-2: #203a43;
+            --text-color: #1a202c;
+            --text-color-light: #2d3748;
+            --card-shadow: rgba(44, 83, 100, 0.2);
+            --border-color: rgba(44, 83, 100, 0.2);
+            --floating-element-color: rgba(44, 83, 100, 0.1);
+            --floating-element-border: rgba(44, 83, 100, 0.2);
+            --button-gradient-1: rgba(44, 83, 100, 0.9);
+            --button-gradient-2: rgba(32, 58, 67, 0.95);
+            --text-gradient-1: #2c5364;
+            --text-gradient-2: #203a43;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-gradient-from: #1a202c;
+            --bg-gradient-to: #2d3748;
+            --accent-color-1: #63b3ed;
+            --accent-color-2: #4299e1;
+            --text-color: #f7fafc;
+            --text-color-light: #e2e8f0;
+            --card-shadow: rgba(0, 0, 0, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --floating-element-color: rgba(255, 255, 255, 0.05);
+            --floating-element-border: rgba(255, 255, 255, 0.1);
+            --button-gradient-1: rgba(99, 179, 237, 0.8);
+            --button-gradient-2: rgba(66, 153, 225, 0.9);
+            --text-gradient-1: #63b3ed;
+            --text-gradient-2: #4299e1;
+            --card-bg: rgba(26, 32, 44, 0.95);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-from), var(--bg-gradient-to), var(--accent-color-2));
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .controls-bar {
+            position: fixed;
+            top: 20px;
+            inset-inline-start: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 35px;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.1),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px var(--card-shadow);
+        }
+
+        .controls-left {
+            position: fixed;
+            top: 20px;
+            inset-inline-start: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 35px;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.1),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px var(--card-shadow);
+        }
+
+        .controls-right {
+            position: fixed;
+            top: 20px;
+            inset-inline-end: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 35px;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.1),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px var(--card-shadow);
+        }
+
+        [dir="ltr"] .controls-left {
+            left: 20px;
+            right: auto;
+        }
+
+        [dir="ltr"] .controls-right {
+            right: 20px;
+            left: auto;
+        }
+
+        [dir="rtl"] .controls-left {
+            right: 20px;
+            left: auto;
+        }
+
+        [dir="rtl"] .controls-right {
+            left: 20px;
+            right: auto;
+        }
+
+        .control-btn {
+            display: inline-block;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--button-gradient-1), var(--button-gradient-2));
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px var(--card-shadow);
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px var(--card-shadow);
+        }
+
+        .auth-btn:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: -45px;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-top: 4rem;
+        }
+
+        .about-header h1 {
+            font-size: 3.5rem;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--text-gradient-1), var(--text-gradient-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 3s infinite alternate;
+        }
+
+        .about-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 1.5rem auto;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px var(--card-shadow);
+        }
+
+        .about-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 1rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--button-gradient-1), var(--button-gradient-2));
+            color: white;
+            box-shadow: 0 5px 15px var(--card-shadow);
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .about-card p {
+            color: var(--text-color-light);
+            line-height: 1.6;
+        }
+
+        .team-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--card-shadow);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--accent-color-1);
+            padding: 5px;
+        }
+
+        .team-member h3 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+            100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+        }
+
+        @media (max-width: 768px) {
+            .about-header h1 {
+                font-size: 2.5rem;
+                padding: 0 1rem;
+            }
+
+            .about-header p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 2rem 0;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-container {
+                padding: 1rem;
+            }
+
+            .about-header {
+                margin-bottom: 2rem;
+                padding-top: 5rem;
+            }
+
+            .about-card {
+                padding: 1.5rem;
+            }
+
+            .about-card-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+                padding: 0.8rem;
+            }
+
+            .about-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .controls-left, .controls-right {
+                padding: 5px;
+                gap: 8px;
+            }
+
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+
+            .footer {
+                margin-top: 3rem;
+                padding: 2rem 0 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-header h1 {
+                font-size: 2rem;
+            }
+
+            .about-header {
+                padding-top: 4rem;
+            }
+
+            .about-card-icon {
+                font-size: 2rem;
+                padding: 0.7rem;
+            }
+
+            .about-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .control-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .controls-left, .controls-right {
+                top: 10px;
+            }
+
+            .controls-left {
+                inset-inline-start: 10px;
+            }
+
+            .controls-right {
+                inset-inline-end: 10px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .about-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            .about-header {
+                padding-top: 5rem;
+                margin-bottom: 2rem;
+            }
+
+            .about-grid {
+                margin: 2rem 0;
+            }
+
+            .about-card {
+                padding: 1rem;
+            }
+
+            .about-card-icon {
+                font-size: 2rem;
+                padding: 0.7rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .team-section {
+                margin: 2rem 0;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            position: relative;
+            margin-top: 6rem;
+            padding: 3rem 0 2rem;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.3),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section {
+            color: var(--text-color);
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to right, var(--text-gradient-1), var(--text-gradient-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--floating-element-color), rgba(255, 255, 255, 0.05));
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            
+        }
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent-color-1);
+            box-shadow: 0 5px 15px var(--card-shadow);
+            border-color: var(--accent-color-1);
+        }
+    </style>
+</head>
+<body>
+    <div class="controls-left">
+        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
+            <span id="themeIcon">☀️</span>
+        </button>
+        <button class="control-btn" id="langToggle">
+            🌐
+        </button>
+    </div>
+    <div class="controls-right">
+        <a href="index.html" style="font-size: 1.5rem;" class="control-btn" aria-label="Home">
+            🏠
+        </a>
+    </div>
+
+    <div class="about-container">
+        <div class="about-header">
+            <h1 data-en="About Himmah" data-ar="عن منصة همة">عن منصة همة</h1>
+            <p data-en="Empowering educators and students through innovative learning solutions" 
+               data-ar="تمكين المعلمين والطلاب من خلال حلول تعليمية مبتكرة">
+                تمكين المعلمين والطلاب من خلال حلول تعليمية مبتكرة
+            </p>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-card-icon">🎯</div>
+                <h3 data-en="Our Mission" data-ar="مهمتنا">مهمتنا</h3>
+                <p data-en="To provide quality education and professional development opportunities for educators across the region" 
+                   data-ar="توفير تعليم عالي الجودة وفرص التطوير المهني للمعلمين في جميع أنحاء المنطقة">
+                    توفير تعليم عالي الجودة وفرص التطوير المهني للمعلمين في جميع أنحاء المنطقة
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card-icon">👁️</div>
+                <h3 data-en="Our Vision" data-ar="رؤيتنا">رؤيتنا</h3>
+                <p data-en="To be the leading educational platform that transforms teaching and learning experiences" 
+                   data-ar="أن نكون المنصة التعليمية الرائدة التي تحول تجارب التعليم والتعلم">
+                    أن نكون المنصة التعليمية الرائدة التي تحول تجارب التعليم والتعلم
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card-icon">💫</div>
+                <h3 data-en="Our Values" data-ar="قيمنا">قيمنا</h3>
+                <p data-en="Excellence, Innovation, Collaboration, and Continuous Learning" 
+                   data-ar="التميز، الابتكار، التعاون، والتعلم المستمر">
+                    التميز، الابتكار، التعاون، والتعلم المستمر
+                </p>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 data-en="Our Team" data-ar="فريقنا">فريقنا</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="about-card-icon">👨‍💼</div>
+                    <h3 data-en="Adnan Morshed" data-ar="عدنان مرشد">عدنان مرشد</h3>
+                    <p data-en="Team Leader" data-ar="رئيس الفريق">رئيس الفريق</p>
+                </div>
+
+                <div class="team-member">
+                    <div class="about-card-icon">👨‍💼</div>
+                    <h3 data-en="Mohamed Tahar" data-ar="محمود طاهر">محمود طاهر</h3>
+                    <p data-en="Media Manager" data-ar="مسؤول الميديا">مسؤول الميديا</p>
+                </div>
+
+                <div class="team-member">
+                    <div class="about-card-icon">👨‍💻</div>
+                    <h3 data-en="Aseel Murad" data-ar="أصيل مراد">أصيل مراد</h3>
+                    <p data-en="Software Engineer" data-ar="مهندس البرمجة">مهندس البرمجة</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="About Himmah" data-ar="عن منصة همة">عن منصة همة</h3>
+                <p data-en="Himmah is a leading educational platform dedicated to empowering teachers and students with innovative learning solutions." 
+                   data-ar="همة هي منصة تعليمية رائدة مكرسة لتمكين المعلمين والطلاب من خلال حلول تعليمية مبتكرة.">
+                    همة هي منصة تعليمية رائدة مكرسة لتمكين المعلمين والطلاب من خلال حلول تعليمية مبتكرة.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Quick Links" data-ar="روابط سريعة">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="index.html" data-en="Home" data-ar="الرئيسية">
+                            <span>🏠</span>
+                            <span>الرئيسية</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pro.html" data-en="Resources" data-ar="الموارد">
+                            <span>📚</span>
+                            <span>الموارد</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-en="Contact Us" data-ar="اتصل بنا">
+                            <span>📧</span>
+                            <span>اتصل بنا</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Connect With Us" data-ar="تواصل معنا">تواصل معنا</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="X (Twitter)">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="WhatsApp">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language state from localStorage
+        let currentLang = localStorage.getItem('language') || 'ar';
+        
+        // Set initial language
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLang;
+        document.title = currentLang === 'ar' ? 'عن منصة همة' : 'About Himmah';
+
+        // Language Toggle
+        const langToggle = document.getElementById('langToggle');
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            document.title = currentLang === 'ar' ? 'عن منصة همة' : 'About Himmah';
+            localStorage.setItem('language', currentLang);
+            updateLanguage();
+        });
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-en][data-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+        });
+
+        // Update initial content
+        document.addEventListener('DOMContentLoaded', updateLanguage);
+    </script>
+</body>
+</html> 

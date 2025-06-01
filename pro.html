@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Professionals - Himmah Teacher Platform" data-ar="الإحترافيون - منصة همة معلم">الإحترافيون - منصة همة معلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root[data-theme="light"] {
+            --bg-gradient-from: #f5f7fa;
+            --bg-gradient-to: #e8edf5;
+            --accent-color-1: #2c5364;
+            --accent-color-2: #203a43;
+            --text-color: #1a202c;
+            --text-color-light: #2d3748;
+            --card-shadow: rgba(44, 83, 100, 0.2);
+            --border-color: rgba(44, 83, 100, 0.2);
+            --floating-element-color: rgba(44, 83, 100, 0.1);
+            --floating-element-border: rgba(44, 83, 100, 0.2);
+            --button-gradient-1: rgba(44, 83, 100, 0.9);
+            --button-gradient-2: rgba(32, 58, 67, 0.95);
+            --text-gradient-1: #2c5364;
+            --text-gradient-2: #203a43;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        :root[data-theme="dark"] {
+            --bg-gradient-from: #1a202c;
+            --bg-gradient-to: #2d3748;
+            --accent-color-1: #63b3ed;
+            --accent-color-2: #4299e1;
+            --text-color: #f7fafc;
+            --text-color-light: #e2e8f0;
+            --card-shadow: rgba(0, 0, 0, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --floating-element-color: rgba(255, 255, 255, 0.05);
+            --floating-element-border: rgba(255, 255, 255, 0.1);
+            --button-gradient-1: rgba(99, 179, 237, 0.8);
+            --button-gradient-2: rgba(66, 153, 225, 0.9);
+            --text-gradient-1: #63b3ed;
+            --text-gradient-2: #4299e1;
+            --card-bg: rgba(26, 32, 44, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-from), var(--bg-gradient-to), var(--accent-color-2));
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            margin-top: 100px; /* Add top margin to push content below the controls */
+        }
+
+        /* Controls Bar */
+        .controls-left {
+            position: fixed;
+            top: 20px;
+            inset-inline-start: 20px;
+            z-index: 1000; /* Increased z-index to ensure controls stay on top */
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 35px;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.1),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px var(--card-shadow);
+        }
+
+        .controls-right {
+            position: fixed;
+            top: 20px;
+            inset-inline-end: 20px;
+            z-index: 1000; /* Increased z-index to ensure controls stay on top */
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 35px;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.1),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px var(--card-shadow);
+        }
+
+        [dir="ltr"] .controls-left {
+            left: 20px;
+            right: auto;
+        }
+
+        [dir="ltr"] .controls-right {
+            right: 20px;
+            left: auto;
+        }
+
+        [dir="rtl"] .controls-left {
+            right: 20px;
+            left: auto;
+        }
+
+        [dir="rtl"] .controls-right {
+            left: 20px;
+            right: auto;
+        }
+
+        .control-btn {
+            display: inline-block;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--button-gradient-1), var(--button-gradient-2));
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px var(--card-shadow);
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .control-btn:hover::before {
+            left: 100%;
+        }
+
+        .auth-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px var(--card-shadow);
+        }
+
+        .auth-btn:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: -45px;
+        }
+
+        /* Update existing styles to use CSS variables */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--text-gradient-1), var(--text-gradient-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 3s infinite alternate;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 1.5rem auto;
+            line-height: 1.8;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .resource-card {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--card-shadow);
+            transition: all 0.4s ease;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--bg-gradient-from);
+            padding-bottom: 10px;
+        }
+        .stats {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .stats p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin: 0;
+            padding: 10px;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--floating-element-color), rgba(255, 255, 255, 0.05));
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+        }
+        
+        .stats {
+            text-align: center;
+            color: var(--text-color-light);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .modal-content {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 
+                0 10px 30px var(--card-shadow),
+                0 0 1px var(--border-color),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--bg-gradient-from);
+            padding-bottom: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .icons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            background: linear-gradient(135deg, var(--button-gradient-1), var(--button-gradient-2));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--card-shadow);
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px var(--card-shadow);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .icons-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .icon-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .icon-link:hover {
+            transform: scale(1.1);
+            background-color: var(--card-bg);
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .icon-link:hover .icon {
+            transform: scale(1.2);
+        }
+
+        .icon-label {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-color);
+        }
+
+        .pdf-link {
+            color: #e74c3c;
+        }
+
+        .ppt-link {
+            color: #f39c12;
+        }
+
+        .video-link {
+            color: #3498db;
+        }
+
+        .pdf-icon {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white !important;
+        }
+
+        .ppt-icon {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white !important;
+        }
+
+        .video-icon {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white !important;
+        }
+
+        /* Video Options Modal */
+        .video-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .video-option-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--button-gradient-1), var(--button-gradient-2));
+            color: #ffffff !important;
+            box-shadow: 0 5px 15px var(--card-shadow);
+        }
+
+        .view-btn {
+            background: #3498db;
+            color: white !important;
+        }
+
+        .view-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .download-btn {
+            background: #27ae60;
+            color: white !important;
+        }
+
+        .download-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #95a5a6;
+            color: white !important;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: #7f8c8d;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--button-gradient-1), var(--button-gradient-2));
+            color: white !important;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .resource-card {
+                padding: 15px;
+                margin: 10px 0;
+            }
+
+            .icons-grid {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .video-options {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .modal-content {
+                padding: 20px 15px;
+                width: 95%;
+            }
+
+            .controls-left, .controls-right {
+                padding: 5px;
+                gap: 8px;
+            }
+
+            .control-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .container {
+                margin-top: 80px; /* Slightly reduced top margin for mobile */
+                padding: 10px;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .controls-left, .controls-right {
+                top: 10px;
+            }
+
+            .controls-left {
+                inset-inline-start: 10px;
+            }
+
+            .controls-right {
+                inset-inline-end: 10px;
+            }
+
+            .control-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                padding: 15px 10px;
+            }
+
+            .icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .video-option-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .container {
+                margin-top: 70px; /* Further reduced top margin for small mobile */
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 1441px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+
+            .container {
+                max-width: 1400px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .header {
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                margin-bottom: 0.8rem;
+            }
+
+            .header p {
+                margin: 0.8rem auto;
+            }
+
+            .grid {
+                gap: 15px;
+            }
+
+            .resource-card {
+                padding: 15px;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            .container {
+                margin-top: 70px; /* Adjusted for landscape orientation */
+            }
+
+            .header {
+                margin-top: 0; /* Remove additional top margin in header for landscape */
+            }
+
+            .controls-left, .controls-right {
+                position: absolute;
+            }
+
+            .header {
+                margin-top: 60px;
+            }
+        }
+
+        /* RTL Support */
+        [dir="rtl"] .control-btn,
+        [dir="rtl"] .card-title,
+        [dir="rtl"] .modal-title {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        [dir="rtl"] .back-btn {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); filter: brightness(1); }
+            25% { transform: translate(10px, -10px) rotate(3deg) scale(1.02); filter: brightness(1.1); }
+            50% { transform: translate(0, -20px) rotate(0deg) scale(1); filter: brightness(1); }
+            75% { transform: translate(-10px, -10px) rotate(-3deg) scale(1.02); filter: brightness(1.1); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); filter: brightness(1); }
+        }
+
+        @keyframes float-reverse {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); filter: brightness(1); }
+            25% { transform: translate(-10px, 10px) rotate(-3deg) scale(1.02); filter: brightness(1.1); }
+            50% { transform: translate(0, 20px) rotate(0deg) scale(1); filter: brightness(1); }
+            75% { transform: translate(10px, 10px) rotate(3deg) scale(1.02); filter: brightness(1.1); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); filter: brightness(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg-gradient-from), var(--bg-gradient-to), var(--accent-color-2));
+        }
+
+        .floating-element {
+            position: absolute;
+            background: var(--floating-element-color);
+            border: 2px solid var(--floating-element-border);
+            border-radius: 20px;
+            pointer-events: none;
+            box-shadow: 0 4px 15px var(--glow-color);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .floating-element::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.9;
+            filter: drop-shadow(0 2px 4px var(--glow-color));
+        }
+
+        .floating-element::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            right: -20%;
+            bottom: -20%;
+            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+            opacity: 0.5;
+            animation: pulse 3s infinite ease-in-out;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .floating-element.book::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236366f1' viewBox='0 0 24 24'%3E%3Cpath d='M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z'/%3E%3C/svg%3E");
+        }
+
+        .floating-element.star::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236366f1' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
+        }
+
+        .floating-element.rocket::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236366f1' viewBox='0 0 24 24'%3E%3Cpath d='M13.13 22.19l-1.63-3.83c1.57-.58 3.04-1.36 4.4-2.27l-2.77 6.1zM5.64 12.5l-3.83-1.63 6.1-2.77c-.91 1.36-1.69 2.83-2.27 4.4M21.61 2.39c-6.09-6.09-15.14.47-15.14.47L12 7.38l4.52 5.53s6.56-9.05.47-15.14M8.34 8.34l2.83-2.83c.78.78.78 2.05 0 2.83-.78.78-2.05.78-2.83 0M3 3l3.03 3.03c.78.78.78 2.05 0 2.83-.78.78-2.05.78-2.83 0L0 5.64C.37 4.62 1.62 3.37 3 3'/%3E%3C/svg%3E");
+        }
+
+        .floating-element.bulb::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236366f1' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm-1 14h2v1h-2v-1zm6-5.87c-.68 1.35-2.04 2.37-3.58 2.72-.16.04-.32.15-.32.32V14h-2v-1.83c0-.17-.16-.28-.32-.32-1.54-.35-2.9-1.37-3.58-2.72-.14-.28-.22-.6-.22-.93 0-1.1.9-2 2-2s2 .9 2 2h2c0-1.1.9-2 2-2s2 .9 2 2c0 .33-.08.65-.22.93z'/%3E%3C/svg%3E");
+        }
+
+        .floating-element.target::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236366f1' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z'/%3E%3C/svg%3E");
+        }
+
+        .floating-element.medal::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%236366f1' viewBox='0 0 24 24'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.67-3.13 8.79-7 9.94-3.87-1.15-7-5.27-7-9.94V6.3l7-3.12z M11 7h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E");
+        }
+
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--card-shadow);
+        }
+
+        /* Footer Styles */
+        .footer {
+            position: relative;
+            margin-top: 6rem;
+            padding: 3rem 0 2rem;
+            background: linear-gradient(135deg, 
+                rgba(var(--floating-element-color), 0.3),
+                rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            z-index: 1;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(44, 83, 100, 0.05),
+                rgba(32, 58, 67, 0.05));
+            z-index: -1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section {
+            color: var(--text-color);
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to right, var(--text-gradient-1), var(--text-gradient-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--accent-color-1), var(--accent-color-2));
+        }
+
+        .footer-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 0.8rem 0;
+            color: var(--text-color-light);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color-1);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--floating-element-color), rgba(255, 255, 255, 0.05));
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent-color-1);
+            box-shadow: 0 5px 15px var(--card-shadow);
+            border-color: var(--accent-color-1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-links a {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls-left">
+        <a href="index.html" class="control-btn" style="font-size: 1.3rem;" aria-label="Home">🏠</a>
+        <button class="control-btn" id="themeToggle" aria-label="Toggle theme">
+            <span id="themeIcon">☀️</span>
+        </button>
+    </div>
+    <div class="controls-right">
+        <button class="control-btn" id="langToggle" aria-label="Toggle language">🌐</button>
+        <a href="login.html" class="control-btn" aria-label="Login">👤</a>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1 data-en="Professionals" data-ar="الإحترافيون">الإحترافيون</h1>
+            <p data-en="Access your PDF documents, PowerPoint presentations, and video content" 
+               data-ar="الوصول إلى مستندات PDF والعروض التقديمية ومحتوى الفيديو">
+                الوصول إلى مستندات PDF والعروض التقديمية ومحتوى الفيديو
+            </p>
+        </div>
+        
+        <div class="stats">
+            <p data-en="📚 110 Resource Collections Available" 
+               data-ar="📚 110 مجموعة موارد متاحة">
+                📚 110 مجموعة موارد متاحة
+            </p>
+        </div>
+
+        <div class="grid" id="resourceGrid">
+            <!-- Resources will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Icons Modal -->
+    <div id="iconsModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-title" id="modalTitle">خيارات المورد</div>
+            <div class="icons-grid" id="iconsGrid">
+                <!-- Icons will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Options Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div class="modal-title" data-en="Video Options" data-ar="خيارات الفيديو">خيارات الفيديو</div>
+            <div class="video-options">
+                <a id="viewVideoBtn" class="video-option-btn view-btn" target="_blank" data-en="👁️ View Video" data-ar="👁️ عرض الفيديو">
+                    👁️ عرض الفيديو
+                </a>
+                <a id="downloadVideoBtn" class="video-option-btn download-btn" data-en="⬇️ Download Video" data-ar="⬇️ تحميل الفيديو">
+                    ⬇️ تحميل الفيديو
+                </a>
+            </div>
+            <button class="back-btn" onclick="showIconsModal()" data-en="Back to Options" data-ar="رجوع للخيارات">رجوع للخيارات</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 data-en="About Himmah" data-ar="عن منصة همة">عن منصة همة</h3>
+                <p data-en="Himmah is a leading educational platform dedicated to empowering teachers and students with innovative learning solutions." 
+                   data-ar="همة هي منصة تعليمية رائدة مكرسة لتمكين المعلمين والطلاب من خلال حلول تعليمية مبتكرة.">
+                    همة هي منصة تعليمية رائدة مكرسة لتمكين المعلمين والطلاب من خلال حلول تعليمية مبتكرة.
+                </p>
+                <p data-en="Our mission is to provide quality education and professional development opportunities for educators across the region." 
+                   data-ar="مهمتنا هي توفير تعليم عالي الجودة وفرص التطوير المهني للمعلمين في جميع أنحاء المنطقة.">
+                    مهمتنا هي توفير تعليم عالي الجودة وفرص التطوير المهني للمعلمين في جميع أنحاء المنطقة.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Quick Links" data-ar="روابط سريعة">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="about.html" data-en="About Us" data-ar="من نحن">
+                            <span>📖</span>
+                            <span>من نحن</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-en="Our Courses" data-ar="دوراتنا">
+                            <span>📚</span>
+                            <span>دوراتنا</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-en="Contact Us" data-ar="اتصل بنا">
+                            <span>📧</span>
+                            <span>اتصل بنا</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-en="FAQ" data-ar="الأسئلة الشائعة">
+                            <span>❓</span>
+                            <span>الأسئلة الشائعة</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-en="Connect With Us" data-ar="تواصل معنا">تواصل معنا</h3>
+                <p data-en="Follow us on social media to stay updated with our latest news and announcements." 
+                   data-ar="تابعنا على وسائل التواصل الاجتماعي للبقاء على اطلاع بأحدث أخبارنا وإعلاناتنا.">
+                    تابعنا على وسائل التواصل الاجتماعي للبقاء على اطلاع بأحدث أخبارنا وإعلاناتنا.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="X (Twitter)">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="WhatsApp">
+                        <svg class="social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-en="© 2024 Himmah Educational Platform. All rights reserved." 
+               data-ar="© 2024 منصة همة للتعليم. جميع الحقوق محفوظة.">
+                © 2024 منصة همة للتعليم. جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/language.js"></script>
+    <script>
+        // File arrays for cycling through available files
+        // Generate an array from pdf1.pdf to pdf110.pdf
+        const pdfFiles = Array.from({length: 110}, (_, i) => `pdf${i + 1}.pdf`);
+        const pptFiles = Array.from({length: 110}, (_, i) => `ppt${i + 1}.pptx`);
+        const videoFiles = Array.from({length: 110}, (_, i) => `v${i + 1}.mp4`);
+
+        // Resource topics for variety
+        const topics = [
+            'Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5', 'Course 6', 'Course 7', 'Course 8', 'Course 9', 'Course 10',  
+            'Course 11', 'Course 12', 'Course 13', 'Course 14', 'Course 15', 'Course 16', 'Course 17', 'Course 18', 'Course 19', 'Course 20',  
+            'Course 21', 'Course 22', 'Course 23', 'Course 24', 'Course 25', 'Course 26', 'Course 27', 'Course 28', 'Course 29', 'Course 30',  
+            'Course 31', 'Course 32', 'Course 33', 'Course 34', 'Course 35', 'Course 36', 'Course 37', 'Course 38', 'Course 39', 'Course 40',  
+            'Course 41', 'Course 42', 'Course 43', 'Course 44', 'Course 45', 'Course 46', 'Course 47', 'Course 48', 'Course 49', 'Course 50',  
+            'Course 51', 'Course 52', 'Course 53', 'Course 54', 'Course 55', 'Course 56', 'Course 57', 'Course 58', 'Course 59', 'Course 60',  
+            'Course 61', 'Course 62', 'Course 63', 'Course 64', 'Course 65', 'Course 66', 'Course 67', 'Course 68', 'Course 69', 'Course 70',  
+            'Course 71', 'Course 72', 'Course 73', 'Course 74', 'Course 75', 'Course 76', 'Course 77', 'Course 78', 'Course 79', 'Course 80',  
+            'Course 81', 'Course 82', 'Course 83', 'Course 84', 'Course 85', 'Course 86', 'Course 87', 'Course 88', 'Course 89', 'Course 90',  
+            'Course 91', 'Course 92', 'Course 93', 'Course 94', 'Course 95', 'Course 96', 'Course 97', 'Course 98', 'Course 99', 'Course 100',  
+            'Course 101', 'Course 102', 'Course 103', 'Course 104', 'Course 105', 'Course 106', 'Course 107', 'Course 108', 'Course 109', 'Course 110'  
+        ];
+
+        let currentCardData = {};
+
+        function showVideoModal(videoPath) {
+            const iconsModal = document.getElementById('iconsModal');
+            const videoModal = document.getElementById('videoModal');
+            const viewBtn = document.getElementById('viewVideoBtn');
+            const downloadBtn = document.getElementById('downloadVideoBtn');
+            
+            viewBtn.href = videoPath;
+            
+            // Set up download button to force download
+            downloadBtn.onclick = function(e) {
+                e.preventDefault();
+                const link = document.createElement('a');
+                link.href = videoPath;
+                link.download = videoPath.substring(videoPath.lastIndexOf('/') + 1);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
+
+            iconsModal.classList.remove('show');
+            videoModal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('iconsModal').classList.remove('show');
+            document.getElementById('videoModal').classList.remove('show');
+        }
+
+        function showIconsModal(cardIndex, topic, pdfFile, pptFile, videoFile) {
+            // Only update currentCardData if new data is provided
+            if (cardIndex !== undefined) {
+                currentCardData = { cardIndex, topic, pdfFile, pptFile, videoFile };
+            }
+            
+            // Ensure we have currentCardData
+            if (!currentCardData || !currentCardData.topic) {
+                closeModal();
+                return;
+            }
+            
+            const modal = document.getElementById('iconsModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const iconsGrid = document.getElementById('iconsGrid');
+            
+            // Translate the title based on current language
+            modalTitle.textContent = currentLang === 'ar' ? getArabicTitle(currentCardData.topic) : currentCardData.topic;
+            
+            const pdfText = currentLang === 'ar' ? 'PDF ملف' : 'PDF';
+            const pptText = currentLang === 'ar' ? 'عرض تقديمي' : 'PowerPoint';
+            const videoText = currentLang === 'ar' ? 'فيديو' : 'Video';
+            
+            iconsGrid.innerHTML = `
+                <a href="pdf/${currentCardData.pdfFile}" class="icon-link pdf-link" target="_blank" title="${pdfText}">
+                    <div class="icon pdf-icon">PDF</div>
+                    <span class="icon-label">${pdfText}</span>
+                </a>
+                <a href="ppt/${currentCardData.pptFile}" class="icon-link ppt-link" target="_blank" title="${pptText}">
+                    <div class="icon ppt-icon">PPT</div>
+                    <span class="icon-label">${pptText}</span>
+                </a>
+                <div class="icon-link video-link" onclick="showVideoModal('video/${currentCardData.videoFile}')" title="${videoText}">
+                    <div class="icon video-icon">▶</div>
+                    <span class="icon-label">${videoText}</span>
+                </div>
+            `;
+            
+            // Hide video modal and show icons modal
+            document.getElementById('videoModal').classList.remove('show');
+            modal.classList.add('show');
+        }
+
+        // Set Arabic as default language
+        let currentLang = localStorage.getItem('language') || 'ar';
+        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.lang = currentLang;
+
+        const translations = {
+            'View Video': 'عرض الفيديو',
+            'Download Video': 'تحميل الفيديو',
+            'Back to Options': 'العودة للخيارات',
+            'Resource Options': 'خيارات المورد',
+            'Video Options': 'خيارات الفيديو',
+            'PDF': 'PDF',
+            'PowerPoint': 'باوربوينت',
+            'Video': 'فيديو'
+        };
+
+        // Theme Toggle with shared state
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        // Check for saved theme preference or default to 'light'
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+        });
+
+        // Update initial content on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            createFloatingElements();
+            updateLanguage();
+            generateResourceCards();
+            // Set initial theme toggle text
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            themeIcon.textContent = currentLang === 'ar' ? 
+                (currentTheme === 'light' ? '☀️' : '🌙') : 
+                (currentTheme === 'light' ? '☀️' : '🌙');
+        });
+
+        // Language Toggle (now toggles from Arabic to English)
+        const langToggle = document.getElementById('langToggle');
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            document.title = currentLang === 'ar' ? 'مكتبة الموارد' : 'Resource Library';
+            localStorage.setItem('language', currentLang);
+            // Update theme toggle text when language changes
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            themeIcon.textContent = currentLang === 'ar' ? 
+                (currentTheme === 'light' ? '☀️' : '🌙') : 
+                (currentTheme === 'light' ? '☀️' : '🌙');
+            updateLanguage();
+            generateResourceCards();
+        });
+
+        function updateLanguage() {
+            // Update all elements with data-en and data-ar attributes
+            document.querySelectorAll('[data-en][data-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLang}`);
+            });
+
+            // Update dynamic content
+            if (document.getElementById('modalTitle')) {
+                const modalTitle = document.getElementById('modalTitle');
+                if (currentLang === 'ar') {
+                    modalTitle.textContent = translations[modalTitle.textContent] || modalTitle.textContent;
+                }
+            }
+
+            // Update buttons text
+            const viewBtn = document.getElementById('viewVideoBtn');
+            const downloadBtn = document.getElementById('downloadVideoBtn');
+            const backBtn = document.querySelector('.back-btn');
+
+            if (viewBtn) {
+                viewBtn.textContent = currentLang === 'ar' ? '👁️ عرض الفيديو' : '👁️ View Video';
+            }
+            if (downloadBtn) {
+                downloadBtn.textContent = currentLang === 'ar' ? '⬇️ تحميل الفيديو' : '⬇️ Download Video';
+            }
+            if (backBtn) {
+                backBtn.textContent = currentLang === 'ar' ? '← العودة للخيارات' : '← Back to Options';
+            }
+
+            // Update resource cards if they exist
+            generateResourceCards();
+        }
+
+        function generateResourceCards() {
+            const grid = document.getElementById('resourceGrid');
+            grid.innerHTML = ''; // Clear existing cards
+            
+            for (let i = 1; i <= 110; i++) {
+                const pdfFile = pdfFiles[(i - 1) % pdfFiles.length];
+                const pptFile = pptFiles[(i - 1) % pptFiles.length];
+                const videoFile = videoFiles[(i - 1) % videoFiles.length];
+                const topic = topics[(i - 1) % topics.length];
+                const partNumber = Math.ceil(i / topics.length);
+                const partText = partNumber > 1 ? 
+                    (currentLang === 'ar' ? ` - الجزء ${partNumber}` : ` - Part ${partNumber}`) : '';
+                const fullTitle = `${topic}${partText}`;
+                
+                const card = document.createElement('div');
+                card.className = 'resource-card';
+                
+                // Get the translated title
+                const displayTitle = currentLang === 'ar' ? getArabicTitle(fullTitle) : fullTitle;
+                
+                card.innerHTML = `
+                    <div class="card-title">
+                        ${displayTitle}
+                    </div>
+                    <div class="icons-container">
+                        <button class="menu-toggle" onclick="showIconsModal(${i}, '${fullTitle}', '${pdfFile}', '${pptFile}', '${videoFile}')" title="${currentLang === 'ar' ? 'عرض الخيارات' : 'Show options'}">
+                            ⋯
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            }
+        }
+
+        // Helper function to convert titles to Arabic
+        function getArabicTitle(englishTitle) {
+            const arabicTitles = {
+                'Course 1': 'الدورة 1',
+                'Course 2': 'الدورة 2',
+                'Course 3': 'الدورة 3',
+                'Course 4': 'الدورة 4',
+                'Course 5': 'الدورة 5',
+                'Course 6': 'الدورة 6',
+                'Course 7': 'الدورة 7',
+                'Course 8': 'الدورة 8',
+                'Course 9': 'الدورة 9',
+                'Course 10': 'الدورة 10',
+                'Course 11': 'الدورة 11',
+                'Course 12': 'الدورة 12',
+                'Course 13': 'الدورة 13',
+                'Course 14': 'الدورة 14',
+                'Course 15': 'الدورة 15',
+                'Course 16': 'الدورة 16',
+                'Course 17': 'الدورة 17',
+                'Course 18': 'الدورة 18',
+                'Course 19': 'الدورة 19',
+                'Course 20': 'الدورة 20',
+                'Course 21': 'الدورة 21',
+                'Course 22': 'الدورة 22',
+                'Course 23': 'الدورة 23',
+                'Course 24': 'الدورة 24',
+                'Course 25': 'الدورة 25',
+                'Course 26': 'الدورة 26',
+                'Course 27': 'الدورة 27',
+                'Course 28': 'الدورة 28',
+                'Course 29': 'الدورة 29',
+                'Course 30': 'الدورة 30',
+                'Course 31': 'الدورة 31',
+                'Course 32': 'الدورة 32',
+                'Course 33': 'الدورة 33',
+                'Course 34': 'الدورة 34',
+                'Course 35': 'الدورة 35',
+                'Course 36': 'الدورة 36',
+                'Course 37': 'الدورة 37',
+                'Course 38': 'الدورة 38',
+                'Course 39': 'الدورة 39',
+                'Course 40': 'الدورة 40',
+                'Course 41': 'الدورة 41',
+                'Course 42': 'الدورة 42',
+                'Course 43': 'الدورة 43',
+                'Course 44': 'الدورة 44',
+                'Course 45': 'الدورة 45',
+                'Course 46': 'الدورة 46',
+                'Course 47': 'الدورة 47',
+                'Course 48': 'الدورة 48',
+                'Course 49': 'الدورة 49',
+                'Course 50': 'الدورة 50',
+                'Course 51': 'الدورة 51',
+                'Course 52': 'الدورة 52',
+                'Course 53': 'الدورة 53',
+                'Course 54': 'الدورة 54',
+                'Course 55': 'الدورة 55',
+                'Course 56': 'الدورة 56',
+                'Course 57': 'الدورة 57',
+                'Course 58': 'الدورة 58',
+                'Course 59': 'الدورة 59',
+                'Course 60': 'الدورة 60',
+                'Course 61': 'الدورة 61',
+                'Course 62': 'الدورة 62',
+                'Course 63': 'الدورة 63',
+                'Course 64': 'الدورة 64',
+                'Course 65': 'الدورة 65',
+                'Course 66': 'الدورة 66',
+                'Course 67': 'الدورة 67',
+                'Course 68': 'الدورة 68',
+                'Course 69': 'الدورة 69',
+                'Course 70': 'الدورة 70',
+                'Course 71': 'الدورة 71',
+                'Course 72': 'الدورة 72',
+                'Course 73': 'الدورة 73',
+                'Course 74': 'الدورة 74',
+                'Course 75': 'الدورة 75',
+                'Course 76': 'الدورة 76',
+                'Course 77': 'الدورة 77',
+                'Course 78': 'الدورة 78',
+                'Course 79': 'الدورة 79',
+                'Course 80': 'الدورة 80',
+                'Course 81': 'الدورة 81',
+                'Course 82': 'الدورة 82',
+                'Course 83': 'الدورة 83',
+                'Course 84': 'الدورة 84',
+                'Course 85': 'الدورة 85',
+                'Course 86': 'الدورة 86',
+                'Course 87': 'الدورة 87',
+                'Course 88': 'الدورة 88',
+                'Course 89': 'الدورة 89',
+                'Course 90': 'الدورة 90',
+                'Course 91': 'الدورة 91',
+                'Course 92': 'الدورة 92',
+                'Course 93': 'الدورة 93',
+                'Course 94': 'الدورة 94',
+                'Course 95': 'الدورة 95',
+                'Course 96': 'الدورة 96',
+                'Course 97': 'الدورة 97',
+                'Course 98': 'الدورة 98',
+                'Course 99': 'الدورة 99',
+                'Course 100': 'الدورة 100',
+                'Course 101': 'الدورة 101',
+                'Course 102': 'الدورة 102',
+                'Course 103': 'الدورة 103',
+                'Course 104': 'الدورة 104',
+                'Course 105': 'الدورة 105',
+                'Course 106': 'الدورة 106',
+                'Course 107': 'الدورة 107',
+                'Course 108': 'الدورة 108',
+                'Course 109': 'الدورة 109',
+                'Course 110': 'الدورة 110'
+            };
+            
+            let arabicTitle = arabicTitles[englishTitle.split(' - Part')[0]];
+            if (!arabicTitle) {
+                return englishTitle;
+            }
+            
+            const partMatch = englishTitle.match(/- Part (\d+)/);
+            if (partMatch) {
+                arabicTitle += ` - الجزء ${partMatch[1]}`;
+            }
+            
+            return arabicTitle;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', generateResourceCards);
+        
+        // Close modal when clicking outside
+        document.getElementById('iconsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function createFloatingElements() {
+            const background = document.createElement('div');
+            background.className = 'background-animation';
+            document.body.appendChild(background);
+
+            const elements = [
+                'book', 'star', 'rocket', 'bulb', 'target', 'medal'
+            ];
+            const sizes = ['40px', '50px', '60px', '70px'];
+            const durations = ['25s', '30s', '35s'];
+
+            // Create fewer elements
+            for (let i = 0; i < 12; i++) {
+                const element = document.createElement('div');
+                element.className = `floating-element ${elements[i % elements.length]}`;
+                element.style.width = sizes[i % sizes.length];
+                element.style.height = sizes[i % sizes.length];
+                
+                // Spread elements more evenly
+                const cluster = Math.floor(i / 2);
+                const angle = (i % 2) * Math.PI + (Math.random() * 0.5);
+                const distance = 200 + Math.random() * 100;
+                const centerX = (cluster * 30 + 25) % 100;
+                const centerY = (cluster * 40 + 35) % 100;
+                
+                element.style.left = `${centerX + Math.cos(angle) * distance / window.innerWidth * 100}%`;
+                element.style.top = `${centerY + Math.sin(angle) * distance / window.innerHeight * 100}%`;
+                
+                element.style.animation = `${i % 2 === 0 ? 'float' : 'float-reverse'} ${durations[i % durations.length]} infinite ease-in-out`;
+                element.style.animationDelay = `-${Math.random() * 15}s`;
+                element.style.opacity = 0.2 + Math.random() * 0.2; // Reduced opacity
+                background.appendChild(element);
+            }
+        }
+    </script>
+</body>
+</html>
