@@ -10,12 +10,16 @@ function initializeLanguage() {
     // Set page title based on current page
     const pageTitles = {
         'index.html': {
-            ar: 'منصة همة للتعليم',
-            en: 'Himmah Educational Platform'
+            ar: 'منصة همة معلم',
+            en: 'Himmah Teacher Platform'
         },
         'pro.html': {
-            ar: 'مكتبة الموارد',
-            en: 'Resource Library'
+            ar: 'الإحترافيون - منصة همة معلم',
+            en: 'Professionals - Himmah Teacher Platform'
+        },
+        'teacher.html': {
+            ar: 'المعلمون - منصة همة معلم',
+            en: 'Teachers - Himmah Teacher Platform'
         },
         'about.html': {
             ar: 'عن منصة همة',
